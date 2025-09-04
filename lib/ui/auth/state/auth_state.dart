@@ -23,7 +23,7 @@ class AuthState {
       isAuthenticated: isAuthenticated ?? this.isAuthenticated,
       user: user ?? this.user,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

@@ -19,10 +19,10 @@ class AuthViewModel extends _$AuthViewModel {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
-      final res = await _repo.login(username, password);
+      final user = await _repo.login(username, password);
       state = state.copyWith(
         isAuthenticated: true,
-        user: res.user.toDomainUser(),
+        user: user,
         isLoading: false,
       );
     } catch (e) {

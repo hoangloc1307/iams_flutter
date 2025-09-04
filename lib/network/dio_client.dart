@@ -1,12 +1,15 @@
 import 'package:dio/dio.dart';
 
+import '../helpers/parse_response.dart';
+import 'base_response.dart';
+
 class DioClient {
   final Dio _dio;
 
   DioClient({
     required String baseUrl,
-    Duration connectTimeout = const Duration(seconds: 15),
-    Duration receiveTimeout = const Duration(seconds: 20),
+    Duration connectTimeout = const Duration(minutes: 15),
+    Duration receiveTimeout = const Duration(minutes: 20),
     Map<String, dynamic>? headers,
     List<Interceptor>? interceptors,
   }) : _dio = Dio(
@@ -53,6 +56,33 @@ class DioClient {
     options: options,
     cancelToken: cancelToken,
   );
+
+  Future<ApiResult<T>> postApi<T>(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    required T Function(Map<String, dynamic> json) fromJson,
+  }) async {
+    try {
+      final res = await post<Map<String, dynamic>>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+      );
+      return parseEnvelope<T>(res.data, fromJson);
+    } on DioException catch (e) {
+      return ApiResult.failure(
+        code: 'NETWORK_ERROR',
+        message: e.message ?? 'Network error',
+      );
+    } catch (e) {
+      return ApiResult.failure(code: 'UNKNOWN_ERROR', message: e.toString());
+    }
+  }
 
   Future<Response<T>> postFormData<T>(
     String path, {

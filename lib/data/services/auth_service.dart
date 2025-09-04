@@ -19,12 +19,17 @@ class AuthService {
 
   AuthService(this._client);
 
-  Future<Map<String, dynamic>> login(String username, String password) async {
-    final res = await _client.post<BaseApiResponse<AuthResponse>>(
+  Future<AuthResponse> login(String username, String password) async {
+    final result = await _client.postApi<AuthResponse>(
       '/auth/login',
       data: {'username': username, 'password': password},
+      fromJson: (json) => AuthResponse.fromJson(json),
     );
-    return res.data as Map<String, dynamic>;
+
+    if (result.success && result.data != null) {
+      return result.data!;
+    }
+    throw Exception('Login Service Error');
   }
 
   // Future<void> logout() async {

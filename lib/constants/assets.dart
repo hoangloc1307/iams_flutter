@@ -1,3 +1,3 @@
-abstract class Assets {
+abstract final class Assets {
   static const nokLogo = 'assets/images/NOK_Logo.jpg';
 }
