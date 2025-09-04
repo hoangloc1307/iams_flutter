@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iams_fe/env/env.dart';
 import 'package:iams_fe/extensions/string_extension.dart';
+import 'package:iams_fe/ui/auth/screens/login_screen.dart';
 
 void main() {
   print('API URL: ${Env.enviroment}');
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -48,23 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
         title: Text('test ne mOI nguoi'.toCapitalize()),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      body: LoginScreen(),
     );
   }
 }
