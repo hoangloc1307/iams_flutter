@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -20,10 +21,16 @@ class AuthRepository {
 
   AuthRepository(this._service, this._storage);
 
-  Future<User> login(String username, String password) async {
-    final auth = await _service.login(username, password);
-    _storage.write('access_token', auth.tokens.accessToken);
+  Future<Either<String, User>> login(String username, String password) async {
+    try {
+      final data = await _service.login(username, password);
 
-    return auth.user.toDomainUser();
+      if (data.success == false || data.data == null) return Left(data.message);
+
+      _storage.write('access_token', data.data!.tokens.accessToken);
+      return Right(data.data!.user.toDomainUser());
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 }

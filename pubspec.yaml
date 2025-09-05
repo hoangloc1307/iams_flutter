@@ -43,6 +43,7 @@ dependencies:
   json_annotation: ^4.9.0
   equatable: ^2.0.7
   flutter_secure_storage: ^9.2.2
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:

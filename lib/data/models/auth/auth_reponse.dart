@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'user_response.dart';
+
 import 'token.dart';
+import 'user_response.dart';
 
 part 'auth_reponse.g.dart';
 

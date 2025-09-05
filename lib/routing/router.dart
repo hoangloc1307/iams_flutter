@@ -8,20 +8,20 @@ import '../ui/home/screens/home_screen.dart';
 import 'routes.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
+  final isAuthenticated = ref.watch(
+    authViewModelProvider.select((value) => value.isAuthenticated),
+  );
+
   return GoRouter(
     initialLocation: Routes.login,
     redirect: (BuildContext context, GoRouterState state) {
-      final auth = ref.watch(authViewModelProvider);
       final loggingIn = state.matchedLocation == Routes.login;
 
-      // Đang “loading” thì không redirect lung tung (có thể show Splash/Loading page)
-      if (auth.isLoading) return null;
-
-      if (!auth.isAuthenticated && !loggingIn) {
+      if (!isAuthenticated && !loggingIn) {
         return Routes.login;
       }
 
-      if (auth.isAuthenticated && loggingIn) {
+      if (isAuthenticated && loggingIn) {
         return Routes.home;
       }
 

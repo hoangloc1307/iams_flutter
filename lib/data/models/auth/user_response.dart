@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../domain/models/user/user.dart';
+
+import '../../../domain/models/user/user.dart';
 
 // Phải có dòng này để generate code
 part 'user_response.g.dart';

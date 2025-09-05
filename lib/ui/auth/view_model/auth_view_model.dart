@@ -12,22 +12,46 @@ class AuthViewModel extends _$AuthViewModel {
   @override
   AuthState build() {
     _repo = ref.watch(authRepositoryProvider);
+    _checkAuthStatus();
     return const AuthState();
   }
 
-  Future<void> login(String username, String password) async {
-    state = state.copyWith(isLoading: true, errorMessage: null);
+  Future<void> _checkAuthStatus() async {
+    state = state.copyWith(isLoading: true);
 
-    try {
-      final user = await _repo.login(username, password);
-      state = state.copyWith(
-        isAuthenticated: true,
-        user: user,
-        isLoading: false,
-      );
-    } catch (e) {
-      state = state.copyWith(isLoading: false, errorMessage: e.toString());
-    }
+    final userResult = await _repo.getCurrentUser();
+
+    userResult.fold(
+      (error) {
+        state = state.copyWith(isAuthenticated: false, isLoading: false);
+      },
+      (user) {
+        state = state.copyWith(
+          isAuthenticated: true,
+          user: user,
+          isLoading: false,
+        );
+      },
+    );
+  }
+
+  Future<void> login(String username, String password) async {
+    state = state.copyWith(isLoading: true);
+
+    final res = await _repo.login(username, password);
+
+    res.fold(
+      (errorMessage) {
+        state = state.copyWith(isLoading: false, errorMessage: errorMessage);
+      },
+      (user) {
+        state = state.copyWith(
+          isAuthenticated: true,
+          user: user,
+          isLoading: false,
+        );
+      },
+    );
   }
 
   // Future<void> logout() async {

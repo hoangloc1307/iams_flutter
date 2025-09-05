@@ -1,29 +1,16 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../domain/models/user/user.dart';
 
-class AuthState {
-  final bool isAuthenticated;
-  final User? user;
-  final bool isLoading;
-  final String? errorMessage;
+part 'auth_state.freezed.dart';
 
-  const AuthState({
-    this.isAuthenticated = false,
-    this.user,
-    this.isLoading = false,
-    this.errorMessage,
-  });
-
-  AuthState copyWith({
-    bool? isAuthenticated,
+@freezed
+abstract class AuthState with _$AuthState {
+  const factory AuthState({
+    @Default(false) bool isAuthenticated,
+    @Default(true) bool isCheckingAuth,
+    @Default(false) bool isLoading,
     User? user,
-    bool? isLoading,
     String? errorMessage,
-  }) {
-    return AuthState(
-      isAuthenticated: isAuthenticated ?? this.isAuthenticated,
-      user: user ?? this.user,
-      isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage ?? this.errorMessage,
-    );
-  }
+  }) = _AuthState;
 }
