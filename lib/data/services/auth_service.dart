@@ -6,6 +6,7 @@ import '../../network/api_clients.dart';
 import '../../network/base_api_response.dart';
 import '../../network/dio_client.dart';
 import '../models/auth/auth_reponse.dart';
+import '../models/auth/user_response.dart';
 
 part 'auth_service.g.dart';
 
@@ -30,6 +31,17 @@ class AuthService {
         data: {'username': username, 'password': password},
       );
       return BaseApiResponse.fromSucces(result, AuthResponse.fromJson);
+    } on DioException catch (e) {
+      return BaseApiResponse.fromDioException(e);
+    } catch (e) {
+      return BaseApiResponse.failure(message: e.toString());
+    }
+  }
+
+  Future<BaseApiResponse<UserResponse>> getMe() async {
+    try {
+      final result = await _client.get('/auth/get-me');
+      return BaseApiResponse.fromSucces(result, UserResponse.fromJson);
     } on DioException catch (e) {
       return BaseApiResponse.fromDioException(e);
     } catch (e) {

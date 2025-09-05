@@ -12,11 +12,11 @@ class AuthViewModel extends _$AuthViewModel {
   @override
   AuthState build() {
     _repo = ref.watch(authRepositoryProvider);
-    _checkAuthStatus();
+    Future.microtask(_restoreSession);
     return const AuthState();
   }
 
-  Future<void> _checkAuthStatus() async {
+  Future<void> _restoreSession() async {
     state = state.copyWith(isLoading: true);
 
     final userResult = await _repo.getCurrentUser();

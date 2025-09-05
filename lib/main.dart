@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'env/env.dart';
 import 'routing/router.dart';
 
 void main() {
   print('API URL: ${Env.enviroment}');
+  setUrlStrategy(PathUrlStrategy());
   runApp(ProviderScope(child: const MyApp()));
 }
 

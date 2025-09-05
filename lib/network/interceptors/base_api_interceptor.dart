@@ -20,4 +20,18 @@ class BaseApiInterceptor extends Interceptor {
 
     handler.next(options);
   }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
+    if (err.response?.statusCode != 401) {
+      return handler.next(err);
+    }
+
+    final requestOptions = err.requestOptions;
+
+    final alreadyRetried = requestOptions.extra['__ret'] == true;
+    if (alreadyRetried) {
+      return handler.next(err);
+    }
+  }
 }

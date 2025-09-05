@@ -28,7 +28,20 @@ class AuthRepository {
       if (data.success == false || data.data == null) return Left(data.message);
 
       _storage.write('access_token', data.data!.tokens.accessToken);
+      _storage.write('refresh_token', data.data!.tokens.refreshToken);
       return Right(data.data!.user.toDomainUser());
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, User>> getCurrentUser() async {
+    try {
+      final data = await _service.getMe();
+
+      if (data.success == false || data.data == null) return Left(data.message);
+
+      return Right(data.data!.toDomainUser());
     } catch (e) {
       return Left(e.toString());
     }
