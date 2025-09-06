@@ -1,8 +1,5 @@
 import 'package:dio/dio.dart';
 
-import '../helpers/parse_response.dart';
-import 'base_api_response.dart';
-
 class DioClient {
   final Dio _dio;
 
@@ -120,4 +117,14 @@ class DioClient {
     options: options,
     cancelToken: cancelToken,
   );
+
+  Future<Response<T>> fetch<T>(
+    RequestOptions requestOptions, {
+    CancelToken? cancelToken,
+  }) {
+    final opts = requestOptions.copyWith(
+      cancelToken: cancelToken ?? requestOptions.cancelToken,
+    );
+    return _dio.fetch<T>(opts);
+  }
 }

@@ -8,10 +8,11 @@ import 'interceptors/base_api_interceptor.dart';
 final baseApiClientProvider = Provider<DioClient>((ref) {
   final baseUrl = Env.baseApiUrl;
   final storage = ref.watch(secureStorageProvider);
-  return DioClient(
-    baseUrl: baseUrl,
-    interceptors: [BaseApiInterceptor(storage)],
-  );
+  final client = DioClient(baseUrl: baseUrl, interceptors: []);
+
+  client.raw.interceptors.add(BaseApiInterceptor(storage, client));
+
+  return client;
 });
 
 final hrApiClientProvider = Provider<DioClient>((ref) {

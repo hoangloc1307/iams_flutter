@@ -27,7 +27,8 @@ class BaseApiResponse<T> {
     Response<dynamic> response,
     T Function(Map<String, dynamic> json) fromJson,
   ) {
-    final res = response.data ?? const <String, dynamic>{};
+    final res =
+        (response.data ?? const <String, dynamic>{}) as Map<String, dynamic>;
 
     if (res['success'] == true) {
       final responseData = res['data'] as Map<String, dynamic>? ?? {};

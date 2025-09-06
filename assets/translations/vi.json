@@ -1,0 +1,7 @@
+{
+  "hello": "Xin chào {name}!",
+  "login": "Đăng nhập",
+  "logout": "Đăng xuất",
+  "items_count": "Bạn có {count} mục",
+  "home_screen": "Màn hình chính"
+}

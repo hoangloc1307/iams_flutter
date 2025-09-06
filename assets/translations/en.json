@@ -1,0 +1,7 @@
+{
+  "hello": "Hello {name}!",
+  "login": "Login",
+  "logout": "Logout",
+  "items_count": "You have {count} items",
+  "home_screen": "Home screen"
+}

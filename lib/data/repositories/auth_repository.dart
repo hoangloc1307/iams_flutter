@@ -37,6 +37,9 @@ class AuthRepository {
 
   Future<Either<String, User>> getCurrentUser() async {
     try {
+      final token = await _storage.read('access_token');
+      if (token == null || token == '') return Left('Token not found.');
+
       final data = await _service.getMe();
 
       if (data.success == false || data.data == null) return Left(data.message);
