@@ -1,7 +1,6 @@
+import 'package:iams_fe/data/repositories/auth_repository.dart';
+import 'package:iams_fe/ui/auth/state/auth_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../../data/repositories/auth_repository.dart';
-import '../state/auth_state.dart';
 
 part 'auth_view_model.g.dart';
 
@@ -12,24 +11,36 @@ class AuthViewModel extends _$AuthViewModel {
   @override
   AuthState build() {
     _repo = ref.watch(authRepositoryProvider);
-    Future.microtask(_restoreSession);
+    // Future.microtask(_restoreSession);
+    _init();
     return const AuthState();
   }
 
-  Future<void> _restoreSession() async {
-    state = state.copyWith(isLoading: true);
+  Future<void> _init() async {
+    const minSplash = Duration(seconds: 2);
+    final started = DateTime.now();
 
     final userResult = await _repo.getCurrentUser();
 
+    final elapsed = DateTime.now().difference(started);
+    if (elapsed < minSplash) {
+      await Future.delayed(minSplash - elapsed);
+    }
+
     userResult.fold(
       (error) {
-        state = state.copyWith(isAuthenticated: false, isLoading: false);
+        state = state.copyWith(
+          isAuthenticated: false,
+          isLoading: false,
+          initialized: true,
+        );
       },
       (user) {
         state = state.copyWith(
           isAuthenticated: true,
           user: user,
           isLoading: false,
+          initialized: true,
         );
       },
     );

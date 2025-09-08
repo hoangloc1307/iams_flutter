@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iams_fe/constants/api_endpoints.dart';
+import 'package:iams_fe/data/models/auth/auth_reponse.dart';
+import 'package:iams_fe/data/models/auth/user_response.dart';
+import 'package:iams_fe/network/api_clients.dart';
+import 'package:iams_fe/network/base_api_response.dart';
+import 'package:iams_fe/network/dio_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../network/api_clients.dart';
-import '../../network/base_api_response.dart';
-import '../../network/dio_client.dart';
-import '../models/auth/auth_reponse.dart';
-import '../models/auth/user_response.dart';
 
 part 'auth_service.g.dart';
 
@@ -27,7 +27,7 @@ class AuthService {
   ) async {
     try {
       final result = await _client.post(
-        '/auth/login',
+        ApiEndpoints.login,
         data: {'username': username, 'password': password},
       );
       return BaseApiResponse.fromSucces(result, AuthResponse.fromJson);
@@ -40,7 +40,7 @@ class AuthService {
 
   Future<BaseApiResponse<UserResponse>> getMe() async {
     try {
-      final result = await _client.get('/auth/get-me');
+      final result = await _client.get(ApiEndpoints.getMe);
       return BaseApiResponse.fromSucces(result, UserResponse.fromJson);
     } on DioException catch (e) {
       return BaseApiResponse.fromDioException(e);

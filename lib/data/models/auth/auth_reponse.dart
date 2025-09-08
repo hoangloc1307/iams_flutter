@@ -1,7 +1,6 @@
+import 'package:iams_fe/data/models/auth/token.dart';
+import 'package:iams_fe/data/models/auth/user_response.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'token.dart';
-import 'user_response.dart';
 
 part 'auth_reponse.g.dart';
 

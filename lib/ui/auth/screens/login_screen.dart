@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../view_model/auth_view_model.dart';
+import 'package:iams_fe/ui/auth/view_model/auth_view_model.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -36,16 +35,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(next.errorMessage!)));
-      }
-
-      // Đăng nhập thành công
-      if (prev?.isAuthenticated != next.isAuthenticated &&
-          next.isAuthenticated) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Đăng nhập thành công!')));
-        // TODO: điều hướng của bạn, ví dụ:
-        // context.go(Routes.home);
       }
     });
 

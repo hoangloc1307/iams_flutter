@@ -2,10 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:iams_fe/translations/i18n.dart';
-
-import 'env/env.dart';
-import 'routing/router.dart';
+import 'package:iams_fe/env/env.dart';
+import 'package:iams_fe/routing/router.dart';
 
 void main() async {
   print('API URL: ${Env.enviroment}');
@@ -29,7 +27,6 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appRouter = ref.watch(routerProvider);
-    i18n.initialize(context);
 
     return MaterialApp.router(
       title: 'IAMS',

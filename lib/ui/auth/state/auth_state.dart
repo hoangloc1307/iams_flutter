@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../domain/models/user/user.dart';
+import 'package:iams_fe/domain/models/user/user.dart';
 
 part 'auth_state.freezed.dart';
 
@@ -8,6 +7,7 @@ part 'auth_state.freezed.dart';
 abstract class AuthState with _$AuthState {
   const factory AuthState({
     @Default(false) bool isAuthenticated,
+    @Default(false) bool initialized,
     @Default(true) bool isCheckingAuth,
     @Default(false) bool isLoading,
     User? user,

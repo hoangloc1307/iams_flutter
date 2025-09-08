@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-import '../ui/auth/screens/login_screen.dart';
-import '../ui/auth/screens/splash_screen.dart';
-import '../ui/auth/view_model/auth_view_model.dart';
-import '../ui/home/screens/home_screen.dart';
-import 'routes.dart';
+import 'package:iams_fe/routing/routes.dart';
+import 'package:iams_fe/ui/auth/screens/login_screen.dart';
+import 'package:iams_fe/ui/auth/screens/splash_screen.dart';
+import 'package:iams_fe/ui/auth/view_model/auth_view_model.dart';
+import 'package:iams_fe/ui/home/screens/home_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final auth = ref.watch(authViewModelProvider);
 
   return GoRouter(
-    initialLocation: Routes.splash,
+    // Route đầu tiên sẽ vào khi mở ứng dụng
+    initialLocation: Routes.login,
+
+    // Check login chưa
     redirect: (BuildContext context, GoRouterState state) {
       final onSplash = state.matchedLocation == Routes.splash;
       final onLogin = state.matchedLocation == Routes.login;
 
-      if (auth.isLoading) return onSplash ? null : Routes.splash;
+      // Load màn hình splash khi chưa init app xong
+      if (!auth.initialized) return onSplash ? null : Routes.splash;
 
       if (auth.isAuthenticated) {
         if (onSplash || onLogin) return Routes.home;
@@ -26,6 +29,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         return onLogin ? null : Routes.login;
       }
     },
+
+    // App routes
     routes: [
       GoRoute(
         path: Routes.splash,

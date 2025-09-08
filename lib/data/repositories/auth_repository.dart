@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iams_fe/constants/storage_keys.dart';
+import 'package:iams_fe/data/services/auth_service.dart';
+import 'package:iams_fe/domain/models/user/user.dart';
+import 'package:iams_fe/helpers/secure_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../domain/models/user/user.dart';
-import '../../helpers/secure_storage.dart';
-import '../services/auth_service.dart';
 
 part 'auth_repository.g.dart';
 
@@ -27,8 +27,9 @@ class AuthRepository {
 
       if (data.success == false || data.data == null) return Left(data.message);
 
-      _storage.write('access_token', data.data!.tokens.accessToken);
-      _storage.write('refresh_token', data.data!.tokens.refreshToken);
+      _storage.write(StorageKeys.accessToken, data.data!.tokens.accessToken);
+      _storage.write(StorageKeys.refreshToken, data.data!.tokens.refreshToken);
+
       return Right(data.data!.user.toDomainUser());
     } catch (e) {
       return Left(e.toString());
@@ -37,7 +38,7 @@ class AuthRepository {
 
   Future<Either<String, User>> getCurrentUser() async {
     try {
-      final token = await _storage.read('access_token');
+      final token = await _storage.read(StorageKeys.accessToken);
       if (token == null || token == '') return Left('Token not found.');
 
       final data = await _service.getMe();
