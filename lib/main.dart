@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:iams_fe/env/env.dart';
 import 'package:iams_fe/routing/router.dart';
+import 'package:iams_fe/themes/app_theme.dart';
 
 void main() async {
   print('API URL: ${Env.enviroment}');
@@ -30,13 +31,14 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'IAMS',
+      theme: AppTheme.light, // Light mode
+      darkTheme: AppTheme.dark, // Dark mode
+      themeMode: ThemeMode.system,
       locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
       routerConfig: appRouter,
+      debugShowCheckedModeBanner: Env.enviroment == 'DEVELOPMENT',
     );
   }
 }
