@@ -31,8 +31,8 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'IAMS',
-      theme: AppTheme.light, // Light mode
-      darkTheme: AppTheme.dark, // Dark mode
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       themeMode: ThemeMode.system,
       locale: context.locale,
       supportedLocales: context.supportedLocales,

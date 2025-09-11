@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iams_fe/routing/routes.dart';
+import 'package:iams_fe/ui/assets/screens/asset_screen.dart';
 import 'package:iams_fe/ui/auth/screens/login_screen.dart';
 import 'package:iams_fe/ui/auth/screens/splash_screen.dart';
 import 'package:iams_fe/ui/auth/view_model/auth_view_model.dart';
 import 'package:iams_fe/ui/home/screens/home_screen.dart';
+import 'package:iams_fe/ui/home/screens/master_layout.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final auth = ref.watch(authViewModelProvider);
@@ -37,7 +39,20 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(path: Routes.login, builder: (context, state) => LoginScreen()),
-      GoRoute(path: Routes.home, builder: (context, state) => HomeScreen()),
+      // Shell có AppBar + Drawer
+      ShellRoute(
+        builder: (context, state, child) => MasterLayout(child: child),
+        routes: [
+          GoRoute(
+            path: Routes.home,
+            builder: (context, state) => const HomeScreen(),
+          ),
+          GoRoute(
+            path: Routes.assets,
+            builder: (context, state) => const AssetsScreen(),
+          ),
+        ],
+      ),
     ],
   );
 });
