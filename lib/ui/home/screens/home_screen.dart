@@ -7,7 +7,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final i18n = ref.watch(i18nProvider(context));
+    final i18n = ref.watch(i18nProvider);
 
     return Column(
       children: [

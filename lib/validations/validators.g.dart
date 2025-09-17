@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'i18n.dart';
+part of 'validators.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$i18nHash() => r'f5ec0ebfdf935af9e271a6404a4b2d8556ba7941';
+String _$validatorsHash() => r'26d3ac84de177b432f56369f4da56db1477f1f56';
 
-/// See also [i18n].
-@ProviderFor(i18n)
-final i18nProvider = AutoDisposeProvider<I18n>.internal(
-  i18n,
-  name: r'i18nProvider',
+/// See also [validators].
+@ProviderFor(validators)
+final validatorsProvider = AutoDisposeProvider<Validators>.internal(
+  validators,
+  name: r'validatorsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$i18nHash,
+      : _$validatorsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef I18nRef = AutoDisposeProviderRef<I18n>;
+typedef ValidatorsRef = AutoDisposeProviderRef<Validators>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

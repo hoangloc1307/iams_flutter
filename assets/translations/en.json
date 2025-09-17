@@ -1,7 +1,14 @@
 {
-  "hello": "Hello {name}!",
-  "login": "Login",
-  "logout": "Logout",
-  "items_count": "You have {count} items",
-  "home_screen": "Home screen"
+  "errors": {
+    "required": "Required"
+  },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "signInToWorkWith": "Sign in to continue working with {appName}",
+    "username": "Username",
+    "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "signIn": "Sign in"
+  }
 }
