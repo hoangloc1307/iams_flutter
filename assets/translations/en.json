@@ -10,5 +10,8 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "signIn": "Sign in"
+  },
+  "home": {
+    "homeScreen": "Home screen"
   }
 }

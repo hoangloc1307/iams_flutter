@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iams_fe/i18n/i18n.dart';
 import 'package:iams_fe/themes/app_colors.dart';
-import 'package:iams_fe/translations/i18n.dart';
 import 'package:iams_fe/ui/auth/view_model/auth_view_model.dart';
 import 'package:iams_fe/validations/validators.dart';
 
@@ -35,8 +35,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(authViewModelProvider);
-    final i18n = ref.watch(i18nProvider);
-    final validators = ref.read(validatorsProvider);
     final colors = Theme.of(context).colorScheme;
     final texts = Theme.of(context).textTheme;
 
@@ -58,12 +56,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      '${i18n.t('auth.welcomeBack')} 👋',
+                      '${I18n.t('auth.welcomeBack')} 👋',
                       style: texts.headlineMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '${i18n.t('auth.signInToWorkWith', namedArgs: {'appName': 'IAMS'})}.',
+                      '${I18n.t('auth.signInToWorkWith', namedArgs: {'appName': 'IAMS'})}.',
                       style: texts.bodyMedium,
                     ),
                     const SizedBox(height: 20),
@@ -76,7 +74,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       autofillHints: const [AutofillHints.username],
                       style: texts.bodyLarge,
                       decoration: InputDecoration(
-                        labelText: i18n.t('auth.username'),
+                        labelText: I18n.t('auth.username'),
                         labelStyle: texts.bodyMedium,
                         prefixIcon: Icon(
                           Icons.person_outline,
@@ -89,7 +87,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           vertical: 14,
                         ),
                       ),
-                      validator: (v) => validators.required(v),
+                      validator: (v) => Validators.required(v),
                     ),
                     const SizedBox(height: 12),
 
@@ -104,7 +102,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           state.isLoading ? null : _onLogin(ref),
                       style: texts.bodyLarge,
                       decoration: InputDecoration(
-                        labelText: i18n.t('auth.password'),
+                        labelText: I18n.t('auth.password'),
                         labelStyle: texts.bodyMedium,
                         prefixIcon: Icon(
                           Icons.lock_outline,
@@ -119,8 +117,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             color: colors.primary,
                           ),
                           tooltip: _obscure
-                              ? i18n.t('auth.showPassword')
-                              : i18n.t('auth.hidePassword'),
+                              ? I18n.t('auth.showPassword')
+                              : I18n.t('auth.hidePassword'),
                         ),
                         filled: true,
                         fillColor: colors.surface,
@@ -129,7 +127,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           vertical: 14,
                         ),
                       ),
-                      validator: (v) => validators.required(v),
+                      validator: (v) => Validators.required(v),
                     ),
                     const SizedBox(height: 20),
 
@@ -147,7 +145,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 ),
                               )
                             : Text(
-                                i18n.t('auth.signIn'),
+                                I18n.t('auth.signIn'),
                                 style: TextStyle(
                                   color: AppColors.onPrimaryLight,
                                 ),

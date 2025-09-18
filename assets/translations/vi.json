@@ -10,5 +10,8 @@
     "showPassword": "Hiện mật khẩu",
     "hidePassword": "Ẩn mật khẩu",
     "signIn": "Đăng nhập"
+  },
+  "home": {
+    "homeScreen": "Màn hình chính"
   }
 }

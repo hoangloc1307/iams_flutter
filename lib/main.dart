@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+// import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:iams_fe/env/env.dart';
 import 'package:iams_fe/routing/router.dart';
 import 'package:iams_fe/themes/app_theme.dart';
 
 void main() async {
   print('API URL: ${Env.enviroment}');
-  setUrlStrategy(PathUrlStrategy());
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  // setUrlStrategy(PathUrlStrategy());
 
   runApp(
     EasyLocalization(
