@@ -2,6 +2,12 @@
   "errors": {
     "required": "Required"
   },
+  "navigation": {
+    "home": "Home",
+    "asset": "Asset",
+    "category": "Category",
+    "inventory": "Inventory"
+  },
   "auth": {
     "welcomeBack": "Welcome back",
     "signInToWorkWith": "Sign in to continue working with {appName}",

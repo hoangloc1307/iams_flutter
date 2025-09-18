@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iams_fe/constants/assets.dart';
+import 'package:iams_fe/i18n/i18n.dart';
 import 'package:iams_fe/ui/layout/drawer/drawer_config.dart';
 
 class DrawerTree extends StatelessWidget {
@@ -34,17 +35,19 @@ class DrawerTree extends StatelessWidget {
     List<DrawerNode> nodes,
     int depth,
   ) {
-    final loc = _currentLocation(context);
+    final currentLocation = GoRouterState.of(context).uri.toString();
     return nodes.map((n) {
       final padding = EdgeInsets.only(left: depth * indentStep);
-      final isSelected = n.route != null && loc.startsWith(n.route!);
+      final isSelected =
+          n.route != null && currentLocation.startsWith(n.route!);
+      final title = I18n.t(n.title);
 
       if (n.isLeaf) {
         return Padding(
           padding: padding,
           child: ListTile(
             leading: Icon(n.icon),
-            title: Text(n.title),
+            title: Text(title),
             selected: isSelected,
             onTap: n.route == null
                 ? null
@@ -62,17 +65,13 @@ class DrawerTree extends StatelessWidget {
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
             leading: Icon(n.icon),
-            title: Text(n.title),
-            initiallyExpanded: _shouldExpand(loc, n),
+            title: Text(title),
+            initiallyExpanded: _shouldExpand(currentLocation, n),
             children: _buildNodes(context, n.children, depth + 1),
           ),
         ),
       );
     }).toList();
-  }
-
-  String _currentLocation(BuildContext context) {
-    return GoRouterState.of(context).uri.toString();
   }
 
   bool _shouldExpand(String loc, DrawerNode parent) {

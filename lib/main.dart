@@ -10,6 +10,8 @@ void main() async {
   print('API URL: ${Env.enviroment}');
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  // Loại bỏ /# trong url trên web
   // setUrlStrategy(PathUrlStrategy());
 
   runApp(

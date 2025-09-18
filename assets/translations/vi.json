@@ -2,6 +2,12 @@
   "errors": {
     "required": "Bắt buộc"
   },
+  "navigation": {
+    "home": "Trang chủ",
+    "asset": "Tài sản",
+    "category": "Danh mục",
+    "inventory": "Kho"
+  },
   "auth": {
     "welcomeBack": "Chào mừng quay lại",
     "signInToWorkWith": "Đăng nhập để tiếp tục làm việc với {appName}",

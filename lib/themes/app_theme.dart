@@ -12,6 +12,12 @@ abstract final class AppTheme {
       primary: AppColors.primaryLight,
       error: AppColors.errorLight,
     ),
+    expansionTileTheme: ExpansionTileThemeData(
+      iconColor: AppColors.primaryLight,
+      textColor: AppColors.primaryLight,
+      collapsedIconColor: AppColors.textPrimaryLight,
+      collapsedTextColor: AppColors.textPrimaryLight,
+    ),
     useMaterial3: true,
   );
 
@@ -24,6 +30,21 @@ abstract final class AppTheme {
       primary: AppColors.primaryDark,
       error: AppColors.errorDark,
     ),
+    expansionTileTheme: ExpansionTileThemeData(
+      iconColor: AppColors.primaryDark,
+      textColor: AppColors.primaryDark,
+      collapsedIconColor: AppColors.textPrimaryDark,
+      collapsedTextColor: AppColors.textPrimaryDark,
+    ),
     useMaterial3: true,
   );
+
+  static String themedAsset(
+    BuildContext context, {
+    required String light,
+    required String dark,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? dark : light;
+  }
 }

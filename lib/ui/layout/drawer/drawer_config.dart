@@ -16,33 +16,15 @@ class DrawerNode {
   bool get isLeaf => children.isEmpty;
 }
 
-const drawerConfig = <DrawerNode>[
+final drawerConfig = <DrawerNode>[
+  DrawerNode(title: 'navigation.home', icon: Icons.home, route: '/home'),
   DrawerNode(
-    title: 'Tài liệu',
-    icon: Icons.folder,
+    title: 'navigation.asset',
+    icon: Icons.devices,
+    route: '/assets',
     children: [
-      DrawerNode(
-        title: 'Hợp đồng',
-        icon: Icons.description,
-        route: '/contracts',
-      ),
-      DrawerNode(
-        title: 'Biên bản',
-        icon: Icons.insert_drive_file,
-        children: [
-          DrawerNode(
-            title: 'PDF',
-            icon: Icons.picture_as_pdf,
-            route: '/minutes/pdf',
-          ),
-          DrawerNode(
-            title: 'Word',
-            icon: Icons.text_snippet,
-            route: '/minutes/word',
-          ),
-        ],
-      ),
+      DrawerNode(title: 'navigation.category', icon: Icons.category),
+      DrawerNode(title: 'navigation.inventory', icon: Icons.inventory),
     ],
   ),
-  DrawerNode(title: 'Cài đặt', icon: Icons.settings, route: '/settings'),
 ];
