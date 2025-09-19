@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iams_fe/constants/assets.dart';
 import 'package:iams_fe/i18n/i18n.dart';
-import 'package:iams_fe/ui/layout/drawer/drawer_config.dart';
+import 'package:iams_fe/layout/drawer/drawer_config.dart';
+import 'package:iams_fe/widgets/language_switcher.dart';
 
 class DrawerTree extends StatelessWidget {
   const DrawerTree({super.key});
@@ -22,9 +23,14 @@ class DrawerTree extends StatelessWidget {
               Assets.nokLogoWhite,
               width: 100,
               fit: BoxFit.contain,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Color.fromRGBO(0, 0, 120, 1),
+              colorBlendMode: BlendMode.srcIn,
             ),
           ),
         ),
+        LanguageSwitcher(),
         ..._buildNodes(context, drawerConfig, 0),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iams_fe/routing/routes.dart';
 
 class DrawerNode {
   final String title;
@@ -17,14 +18,21 @@ class DrawerNode {
 }
 
 final drawerConfig = <DrawerNode>[
-  DrawerNode(title: 'navigation.home', icon: Icons.home, route: '/home'),
+  DrawerNode(title: 'navigation.home', icon: Icons.home, route: Routes.home),
   DrawerNode(
     title: 'navigation.asset',
     icon: Icons.devices,
-    route: '/assets',
     children: [
-      DrawerNode(title: 'navigation.category', icon: Icons.category),
-      DrawerNode(title: 'navigation.inventory', icon: Icons.inventory),
+      DrawerNode(
+        title: 'navigation.category',
+        icon: Icons.category,
+        route: '/asset/category',
+      ),
+      DrawerNode(
+        title: 'navigation.inventory',
+        icon: Icons.inventory,
+        route: '/asset/inventory',
+      ),
     ],
   ),
 ];
