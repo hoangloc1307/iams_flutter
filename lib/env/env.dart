@@ -6,7 +6,7 @@ const String env = String.fromEnvironment('ENV', defaultValue: 'development');
 
 @Envied(
   path: env == 'production' ? '.env.production' : '.env.development',
-  obfuscate: true,
+  obfuscate: env == 'production',
 )
 abstract class Env {
   @EnviedField(varName: 'ENVIROMENT')

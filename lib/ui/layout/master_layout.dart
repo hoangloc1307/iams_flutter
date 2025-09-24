@@ -1,7 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iams_fe/constants/contants.dart';
-import 'package:iams_fe/layout/drawer/drawer_tree.dart';
+import 'package:iams_fe/ui/layout/drawer/drawer_tree.dart';
 
 class MasterLayout extends ConsumerWidget {
   const MasterLayout({super.key, required this.child});
@@ -17,7 +18,10 @@ class MasterLayout extends ConsumerWidget {
           child: DrawerTree(),
         ),
       ),
-      body: child,
+      body: KeyedSubtree(
+        key: ValueKey(context.locale.toString()),
+        child: child,
+      ),
     );
   }
 }

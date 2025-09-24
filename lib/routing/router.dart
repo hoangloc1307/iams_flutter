@@ -7,7 +7,7 @@ import 'package:iams_fe/ui/auth/screens/login_screen.dart';
 import 'package:iams_fe/ui/auth/screens/splash_screen.dart';
 import 'package:iams_fe/ui/auth/view_model/auth_view_model.dart';
 import 'package:iams_fe/ui/home/screens/home_screen.dart';
-import 'package:iams_fe/layout/master_layout.dart';
+import 'package:iams_fe/ui/layout/master_layout.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final auth = ref.watch(authViewModelProvider);
@@ -39,7 +39,6 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(path: Routes.login, builder: (context, state) => LoginScreen()),
-      // Shell có AppBar + Drawer
       ShellRoute(
         builder: (context, state, child) => MasterLayout(child: child),
         routes: [

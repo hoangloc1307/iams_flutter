@@ -1,9 +1,8 @@
-// drawer_tree.dart
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iams_fe/constants/assets.dart';
-import 'package:iams_fe/i18n/i18n.dart';
-import 'package:iams_fe/layout/drawer/drawer_config.dart';
+import 'package:iams_fe/ui/layout/drawer/drawer_config.dart';
 import 'package:iams_fe/widgets/language_switcher.dart';
 
 class DrawerTree extends StatelessWidget {
@@ -46,14 +45,13 @@ class DrawerTree extends StatelessWidget {
       final padding = EdgeInsets.only(left: depth * indentStep);
       final isSelected =
           n.route != null && currentLocation.startsWith(n.route!);
-      final title = I18n.t(n.title);
 
       if (n.isLeaf) {
         return Padding(
           padding: padding,
           child: ListTile(
             leading: Icon(n.icon),
-            title: Text(title),
+            title: Text(n.title.tr()),
             selected: isSelected,
             onTap: n.route == null
                 ? null
@@ -71,7 +69,7 @@ class DrawerTree extends StatelessWidget {
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
             leading: Icon(n.icon),
-            title: Text(title),
+            title: Text(n.title.tr()),
             initiallyExpanded: _shouldExpand(currentLocation, n),
             children: _buildNodes(context, n.children, depth + 1),
           ),
