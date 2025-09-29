@@ -8,8 +8,12 @@ import 'package:iams_fe/ui/auth/screens/splash_screen.dart';
 import 'package:iams_fe/ui/auth/view_model/auth_view_model.dart';
 import 'package:iams_fe/ui/home/screens/home_screen.dart';
 import 'package:iams_fe/ui/layout/master_layout.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final routerProvider = Provider<GoRouter>((ref) {
+part 'router.g.dart';
+
+@riverpod
+GoRouter router(Ref ref) {
   final auth = ref.watch(authViewModelProvider);
 
   return GoRouter(
@@ -54,4 +58,4 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
     ],
   );
-});
+}

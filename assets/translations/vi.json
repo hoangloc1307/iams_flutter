@@ -1,6 +1,7 @@
 {
   "errors": {
-    "required": "Bắt buộc"
+    "required": "Bắt buộc",
+    "minLength": "Ít nhất {min} ký tự"
   },
   "navigation": {
     "home": "Trang chủ",

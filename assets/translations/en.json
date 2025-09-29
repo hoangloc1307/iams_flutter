@@ -1,6 +1,7 @@
 {
   "errors": {
-    "required": "Required"
+    "required": "Required",
+    "minLength": "Minimum {min} characters required"
   },
   "navigation": {
     "home": "Home",
