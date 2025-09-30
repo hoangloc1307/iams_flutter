@@ -35,4 +35,5 @@ final drawerConfig = <DrawerNode>[
       ),
     ],
   ),
+  DrawerNode(title: 'navigation.post', icon: Icons.feed, route: Routes.posts),
 ];

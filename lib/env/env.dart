@@ -17,4 +17,7 @@ abstract class Env {
 
   @EnviedField(varName: 'HR_API_URL')
   static final String hrApiUrl = _Env.hrApiUrl;
+
+  @EnviedField(varName: 'JSON_HOLDER_API_URL')
+  static final String jsonHolderApiUrl = _Env.jsonHolderApiUrl;
 }

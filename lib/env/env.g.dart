@@ -15,4 +15,7 @@ final class _Env {
   static const String baseApiUrl = 'http://10.0.2.2:3000/api';
 
   static const String hrApiUrl = 'https://10.203.192.81:5430';
+
+  static const String jsonHolderApiUrl =
+      'https://jsonplaceholder.typicode.com/';
 }

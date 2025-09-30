@@ -7,7 +7,8 @@
     "home": "Home",
     "asset": "Asset",
     "category": "Category",
-    "inventory": "Inventory"
+    "inventory": "Inventory",
+    "post": "Post"
   },
   "auth": {
     "welcomeBack": "Welcome back",

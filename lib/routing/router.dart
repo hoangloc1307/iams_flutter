@@ -8,6 +8,7 @@ import 'package:iams_fe/ui/auth/screens/splash_screen.dart';
 import 'package:iams_fe/ui/auth/view_model/auth_view_model.dart';
 import 'package:iams_fe/ui/home/screens/home_screen.dart';
 import 'package:iams_fe/ui/layout/master_layout.dart';
+import 'package:iams_fe/ui/posts/screens/post_list_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
@@ -53,6 +54,10 @@ GoRouter router(Ref ref) {
           GoRoute(
             path: Routes.assets,
             builder: (context, state) => const AssetsScreen(),
+          ),
+          GoRoute(
+            path: Routes.posts,
+            builder: (context, state) => const PostListScreen(),
           ),
         ],
       ),
