@@ -25,14 +25,15 @@ class BaseApiResponse<T> {
 
   static BaseApiResponse<T> fromSucces<T>(
     Response<dynamic> response,
-    T Function(Map<String, dynamic> json) fromJson,
+    T Function(Map<String, dynamic> json)? fromJson,
   ) {
     final res =
         (response.data ?? const <String, dynamic>{}) as Map<String, dynamic>;
 
     if (res['success'] == true) {
-      final responseData = res['data'] as Map<String, dynamic>? ?? {};
-      return BaseApiResponse.success(fromJson(responseData));
+      final raw = res['data'];
+      final T value = fromJson != null ? fromJson(raw) : raw as T;
+      return BaseApiResponse.success(value);
     } else {
       final code = res['code'] as String?;
       final message = res['message'] as String?;

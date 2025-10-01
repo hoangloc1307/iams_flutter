@@ -209,8 +209,8 @@ return $default(_that.items,_that.loading,_that.error,_that.hasMore,_that.page);
 /// @nodoc
 
 
-class _PostState extends PostState {
-  const _PostState({final  List<Post> items = const <Post>[], this.loading = false, this.error, this.hasMore = true, this.page = 1}): _items = items,super._();
+class _PostState implements PostState {
+  const _PostState({final  List<Post> items = const <Post>[], this.loading = false, this.error, this.hasMore = true, this.page = 1}): _items = items;
   
 
  final  List<Post> _items;

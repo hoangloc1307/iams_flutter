@@ -8,9 +8,10 @@ abstract class AuthState with _$AuthState {
   const factory AuthState({
     @Default(false) bool isAuthenticated,
     @Default(false) bool initialized,
-    @Default(true) bool isCheckingAuth,
     @Default(false) bool isLoading,
     User? user,
     String? errorMessage,
   }) = _AuthState;
+
+  factory AuthState.initial() => const AuthState();
 }

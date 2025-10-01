@@ -13,7 +13,5 @@ abstract class PostState with _$PostState {
     @Default(1) int page,
   }) = _PostState;
 
-  const PostState._();
-
   factory PostState.initial() => const PostState();
 }

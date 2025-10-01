@@ -11,9 +11,8 @@ class AuthViewModel extends _$AuthViewModel {
   @override
   AuthState build() {
     _repo = ref.watch(authRepositoryProvider);
-    // Future.microtask(_restoreSession);
     _init();
-    return const AuthState();
+    return AuthState.initial();
   }
 
   Future<void> _init() async {
@@ -65,8 +64,23 @@ class AuthViewModel extends _$AuthViewModel {
     );
   }
 
-  // Future<void> logout() async {
-  //   await _repo.logout();
-  //   state = const AuthState();
-  // }
+  Future<void> logout() async {
+    state = state.copyWith(isLoading: true);
+
+    final res = await _repo.logout();
+
+    res.fold(
+      (errorMessage) {
+        state = state.copyWith(isLoading: false, errorMessage: errorMessage);
+      },
+      (_) {
+        state = state.copyWith(
+          isAuthenticated: false,
+          user: null,
+          isLoading: false,
+          errorMessage: null,
+        );
+      },
+    );
+  }
 }

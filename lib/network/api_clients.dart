@@ -7,16 +7,16 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'api_clients.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 DioClient baseApiClient(Ref ref) {
-  final storage = ref.watch(secureStorageProvider);
+  final storage = ref.read(secureStorageProvider);
   return DioClient(
     baseUrl: Env.baseApiUrl,
     interceptors: [BaseApiInterceptor(storage)],
   );
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 DioClient hrApiClient(Ref ref) {
   return DioClient(baseUrl: Env.hrApiUrl, interceptors: []);
 }

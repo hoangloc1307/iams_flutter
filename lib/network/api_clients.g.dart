@@ -6,11 +6,11 @@ part of 'api_clients.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$baseApiClientHash() => r'8f3bdf778d26261c3b47a6bda9f8db5d811b9f10';
+String _$baseApiClientHash() => r'ed20a457291d7c65ef1c0161b3b7e1dbd7cdcbd4';
 
 /// See also [baseApiClient].
 @ProviderFor(baseApiClient)
-final baseApiClientProvider = AutoDisposeProvider<DioClient>.internal(
+final baseApiClientProvider = Provider<DioClient>.internal(
   baseApiClient,
   name: r'baseApiClientProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,12 +22,12 @@ final baseApiClientProvider = AutoDisposeProvider<DioClient>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef BaseApiClientRef = AutoDisposeProviderRef<DioClient>;
-String _$hrApiClientHash() => r'9b8daa3a07c2192c21ea98037ac0b45b1bd2fa21';
+typedef BaseApiClientRef = ProviderRef<DioClient>;
+String _$hrApiClientHash() => r'5abf98f08d319240251ae63e4381c8af0c6be943';
 
 /// See also [hrApiClient].
 @ProviderFor(hrApiClient)
-final hrApiClientProvider = AutoDisposeProvider<DioClient>.internal(
+final hrApiClientProvider = Provider<DioClient>.internal(
   hrApiClient,
   name: r'hrApiClientProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -39,7 +39,7 @@ final hrApiClientProvider = AutoDisposeProvider<DioClient>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef HrApiClientRef = AutoDisposeProviderRef<DioClient>;
+typedef HrApiClientRef = ProviderRef<DioClient>;
 String _$jsonHolderApiClientHash() =>
     r'dd52c82ce96087a238dcf5a3749e6216373baac4';
 

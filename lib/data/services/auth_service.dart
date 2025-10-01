@@ -38,6 +38,18 @@ class AuthService {
     }
   }
 
+  Future<BaseApiResponse<void>> logout() async {
+    try {
+      final result = await _client.post(ApiEndpoints.logout);
+
+      return BaseApiResponse.fromSucces(result, null);
+    } on DioException catch (e) {
+      return BaseApiResponse.fromDioException(e);
+    } catch (e) {
+      return BaseApiResponse.failure(message: e.toString());
+    }
+  }
+
   Future<BaseApiResponse<UserResponse>> getMe() async {
     try {
       final result = await _client.get(ApiEndpoints.getMe);

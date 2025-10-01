@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'secure_storage.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 SecureStorage secureStorage(Ref ref) => SecureStorage();
 
 class SecureStorage {

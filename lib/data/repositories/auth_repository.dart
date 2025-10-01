@@ -23,14 +23,40 @@ class AuthRepository {
 
   Future<Either<String, User>> login(String username, String password) async {
     try {
+      // Gọi service login
       final data = await _service.login(username, password);
 
-      if (data.success == false || data.data == null) return Left(data.message);
+      // Nếu lỗi trả về message lỗi
+      if (data.success == false) return Left(data.message);
 
-      _storage.write(StorageKeys.accessToken, data.data!.tokens.accessToken);
-      _storage.write(StorageKeys.refreshToken, data.data!.tokens.refreshToken);
+      // Lưu lại access token và refresh token
+      await Future.wait([
+        _storage.write(StorageKeys.accessToken, data.data!.tokens.accessToken),
+        _storage.write(
+          StorageKeys.refreshToken,
+          data.data!.tokens.refreshToken,
+        ),
+      ]);
 
+      // Trả về thông tin user
       return Right(data.data!.user.toDomainUser());
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, Unit>> logout() async {
+    try {
+      final res = await _service.logout();
+
+      if (res.success == false) return Left(res.message);
+
+      await Future.wait([
+        _storage.delete(StorageKeys.accessToken),
+        _storage.delete(StorageKeys.refreshToken),
+      ]);
+
+      return const Right(unit);
     } catch (e) {
       return Left(e.toString());
     }
@@ -43,7 +69,7 @@ class AuthRepository {
 
       final data = await _service.getMe();
 
-      if (data.success == false || data.data == null) return Left(data.message);
+      if (data.success == false) return Left(data.message);
 
       return Right(data.data!.toDomainUser());
     } catch (e) {
