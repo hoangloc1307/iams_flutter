@@ -33,4 +33,40 @@ class PostRepository {
       return Left(e.toString());
     }
   }
+
+  Future<Either<String, Post>> addPost({
+    required int userId,
+    required String title,
+    required String body,
+  }) async {
+    try {
+      final response = await _service.addPost(
+        userId: userId,
+        title: title,
+        body: body,
+      );
+
+      if (!response.success || response.data == null) {
+        return Left(response.message);
+      }
+
+      return Right(response.data!);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, bool>> deletePost(int id) async {
+    try {
+      final response = await _service.deletePost(id);
+
+      if (!response.success || response.data == null) {
+        return Left(response.message);
+      }
+
+      return Right(response.data!);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

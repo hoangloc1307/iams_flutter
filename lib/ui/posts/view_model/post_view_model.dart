@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:iams_fe/data/repositories/post_repository.dart';
+import 'package:iams_fe/domain/models/post/post.dart';
 import 'package:iams_fe/ui/posts/state/post_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -6,54 +9,60 @@ part 'post_view_model.g.dart';
 
 @riverpod
 class PostViewModel extends _$PostViewModel {
-  static const _pageSize = 10;
+  static const _pageSize = 3;
 
   @override
-  PostState build() {
-    return PostState.initial();
-  }
-
-  Future<void> loadInitial() async {
-    if (state.items.isNotEmpty) return;
-    await refresh();
-  }
-
-  Future<void> refresh() async {
-    state = state.copyWith(loading: true, error: null, page: 1, hasMore: true);
+  Future<PostState> build() async {
     final repo = ref.read(postRepositoryProvider);
 
     final result = await repo.getPosts(page: 1, limit: _pageSize);
-    result.fold(
-      (err) => state = state.copyWith(loading: false, error: err),
-      (data) => state = state.copyWith(
-        loading: false,
-        items: data,
-        hasMore: data.length == _pageSize,
-        page: 1,
-      ),
+
+    return result.fold(
+      (error) => PostState(posts: [], errorMessage: error),
+      (posts) => PostState(posts: posts),
     );
   }
 
-  Future<void> fetchMore() async {
-    if (!state.hasMore || state.loading) return;
+  Future<void> addPost({
+    required int userId,
+    required String title,
+    required String body,
+  }) async {
+    state = const AsyncValue.loading();
+    final repository = ref.read(postRepositoryProvider);
 
-    state = state.copyWith(loading: true, error: null);
-    final nextPage = state.page + 1;
-    final repo = ref.read(postRepositoryProvider);
-
-    final result = await repo.getPosts(page: nextPage, limit: _pageSize);
+    final result = await repository.addPost(
+      userId: userId,
+      title: title,
+      body: body,
+    );
     result.fold(
-      (err) {
-        state = state.copyWith(loading: false, error: err);
-      },
-      (data) {
-        state = state.copyWith(
-          loading: false,
-          items: [...state.items, ...data],
-          hasMore: data.length == _pageSize,
-          page: nextPage,
-        );
-      },
+      (error) => state = AsyncError(error, StackTrace.current),
+      (posts) => refresh(),
+    );
+  }
+
+  Future<void> deletePost(int id) async {
+    state = const AsyncValue.loading();
+    final repository = ref.read(postRepositoryProvider);
+    final result = await repository.deletePost(id);
+    result.fold((error) => state = AsyncError(error, StackTrace.current), (
+      success,
+    ) {
+      if (success == true) {
+        refresh();
+      } else {
+        state = AsyncError('Xoá post thất bại', StackTrace.empty);
+      }
+    });
+  }
+
+  Future<void> refresh() async {
+    final repository = ref.read(postRepositoryProvider);
+    final result = await repository.getPosts(page: 1, limit: _pageSize);
+    result.fold(
+      (error) => state = AsyncError(error, StackTrace.current),
+      (posts) => state = AsyncData(PostState(posts: posts)),
     );
   }
 }

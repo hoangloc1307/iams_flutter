@@ -6,9 +6,9 @@ part 'post_state.freezed.dart';
 @freezed
 abstract class PostState with _$PostState {
   const factory PostState({
-    @Default(<Post>[]) List<Post> items,
-    @Default(false) bool loading,
-    String? error,
+    @Default(<Post>[]) List<Post> posts,
+    @Default(false) bool isLoading,
+    String? errorMessage,
     @Default(true) bool hasMore,
     @Default(1) int page,
   }) = _PostState;

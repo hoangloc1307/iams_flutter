@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostState {
 
- List<Post> get items; bool get loading; String? get error; bool get hasMore; int get page;
+ List<Post> get posts; bool get isLoading; String? get errorMessage; bool get hasMore; int get page;
 /// Create a copy of PostState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PostStateCopyWith<PostState> get copyWith => _$PostStateCopyWithImpl<PostState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostState&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.loading, loading) || other.loading == loading)&&(identical(other.error, error) || other.error == error)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.page, page) || other.page == page));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostState&&const DeepCollectionEquality().equals(other.posts, posts)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.page, page) || other.page == page));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(items),loading,error,hasMore,page);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(posts),isLoading,errorMessage,hasMore,page);
 
 @override
 String toString() {
-  return 'PostState(items: $items, loading: $loading, error: $error, hasMore: $hasMore, page: $page)';
+  return 'PostState(posts: $posts, isLoading: $isLoading, errorMessage: $errorMessage, hasMore: $hasMore, page: $page)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PostStateCopyWith<$Res>  {
   factory $PostStateCopyWith(PostState value, $Res Function(PostState) _then) = _$PostStateCopyWithImpl;
 @useResult
 $Res call({
- List<Post> items, bool loading, String? error, bool hasMore, int page
+ List<Post> posts, bool isLoading, String? errorMessage, bool hasMore, int page
 });
 
 
@@ -62,11 +62,11 @@ class _$PostStateCopyWithImpl<$Res>
 
 /// Create a copy of PostState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? items = null,Object? loading = null,Object? error = freezed,Object? hasMore = null,Object? page = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? posts = null,Object? isLoading = null,Object? errorMessage = freezed,Object? hasMore = null,Object? page = null,}) {
   return _then(_self.copyWith(
-items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
-as List<Post>,loading: null == loading ? _self.loading : loading // ignore: cast_nullable_to_non_nullable
-as bool,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+posts: null == posts ? _self.posts : posts // ignore: cast_nullable_to_non_nullable
+as List<Post>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,
@@ -154,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Post> items,  bool loading,  String? error,  bool hasMore,  int page)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Post> posts,  bool isLoading,  String? errorMessage,  bool hasMore,  int page)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PostState() when $default != null:
-return $default(_that.items,_that.loading,_that.error,_that.hasMore,_that.page);case _:
+return $default(_that.posts,_that.isLoading,_that.errorMessage,_that.hasMore,_that.page);case _:
   return orElse();
 
 }
@@ -175,10 +175,10 @@ return $default(_that.items,_that.loading,_that.error,_that.hasMore,_that.page);
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Post> items,  bool loading,  String? error,  bool hasMore,  int page)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Post> posts,  bool isLoading,  String? errorMessage,  bool hasMore,  int page)  $default,) {final _that = this;
 switch (_that) {
 case _PostState():
-return $default(_that.items,_that.loading,_that.error,_that.hasMore,_that.page);case _:
+return $default(_that.posts,_that.isLoading,_that.errorMessage,_that.hasMore,_that.page);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +195,10 @@ return $default(_that.items,_that.loading,_that.error,_that.hasMore,_that.page);
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Post> items,  bool loading,  String? error,  bool hasMore,  int page)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Post> posts,  bool isLoading,  String? errorMessage,  bool hasMore,  int page)?  $default,) {final _that = this;
 switch (_that) {
 case _PostState() when $default != null:
-return $default(_that.items,_that.loading,_that.error,_that.hasMore,_that.page);case _:
+return $default(_that.posts,_that.isLoading,_that.errorMessage,_that.hasMore,_that.page);case _:
   return null;
 
 }
@@ -210,18 +210,18 @@ return $default(_that.items,_that.loading,_that.error,_that.hasMore,_that.page);
 
 
 class _PostState implements PostState {
-  const _PostState({final  List<Post> items = const <Post>[], this.loading = false, this.error, this.hasMore = true, this.page = 1}): _items = items;
+  const _PostState({final  List<Post> posts = const <Post>[], this.isLoading = false, this.errorMessage, this.hasMore = true, this.page = 1}): _posts = posts;
   
 
- final  List<Post> _items;
-@override@JsonKey() List<Post> get items {
-  if (_items is EqualUnmodifiableListView) return _items;
+ final  List<Post> _posts;
+@override@JsonKey() List<Post> get posts {
+  if (_posts is EqualUnmodifiableListView) return _posts;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_items);
+  return EqualUnmodifiableListView(_posts);
 }
 
-@override@JsonKey() final  bool loading;
-@override final  String? error;
+@override@JsonKey() final  bool isLoading;
+@override final  String? errorMessage;
 @override@JsonKey() final  bool hasMore;
 @override@JsonKey() final  int page;
 
@@ -235,16 +235,16 @@ _$PostStateCopyWith<_PostState> get copyWith => __$PostStateCopyWithImpl<_PostSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostState&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.loading, loading) || other.loading == loading)&&(identical(other.error, error) || other.error == error)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.page, page) || other.page == page));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostState&&const DeepCollectionEquality().equals(other._posts, _posts)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.page, page) || other.page == page));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_items),loading,error,hasMore,page);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_posts),isLoading,errorMessage,hasMore,page);
 
 @override
 String toString() {
-  return 'PostState(items: $items, loading: $loading, error: $error, hasMore: $hasMore, page: $page)';
+  return 'PostState(posts: $posts, isLoading: $isLoading, errorMessage: $errorMessage, hasMore: $hasMore, page: $page)';
 }
 
 
@@ -255,7 +255,7 @@ abstract mixin class _$PostStateCopyWith<$Res> implements $PostStateCopyWith<$Re
   factory _$PostStateCopyWith(_PostState value, $Res Function(_PostState) _then) = __$PostStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Post> items, bool loading, String? error, bool hasMore, int page
+ List<Post> posts, bool isLoading, String? errorMessage, bool hasMore, int page
 });
 
 
@@ -272,11 +272,11 @@ class __$PostStateCopyWithImpl<$Res>
 
 /// Create a copy of PostState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? items = null,Object? loading = null,Object? error = freezed,Object? hasMore = null,Object? page = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? posts = null,Object? isLoading = null,Object? errorMessage = freezed,Object? hasMore = null,Object? page = null,}) {
   return _then(_PostState(
-items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
-as List<Post>,loading: null == loading ? _self.loading : loading // ignore: cast_nullable_to_non_nullable
-as bool,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+posts: null == posts ? _self._posts : posts // ignore: cast_nullable_to_non_nullable
+as List<Post>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,
